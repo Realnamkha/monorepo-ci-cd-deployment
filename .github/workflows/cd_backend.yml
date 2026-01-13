@@ -22,8 +22,8 @@ jobs:
       - name: Build and push backend
         uses: docker/build-push-action@v4
         with:
-          context: my-turborepo # folder Docker can see
-          file: docker/Dockerfile.backend # relative to context
+          context:. # folder Docker can see
+          file: ./my-turborepo/docker/Dockerfile.backend # relative to context
           push: true
           tags: zoldyk/todo-app-backend:${{ github.sha }}
 
