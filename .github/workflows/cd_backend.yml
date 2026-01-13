@@ -19,11 +19,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: list Docker folder
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -R my-turborepo/docker
+
       - name: Build and push backend
         uses: docker/build-push-action@v4
         with:
           context: . # folder Docker can see
-          file: ./my-turborepo/docker/Dockerfile.backend # relative to context
+          file: my-turborepo/docker/Dockerfile.backend # relative to context
           push: true
           tags: zoldyk/todo-app-backend:${{ github.sha }}
 
