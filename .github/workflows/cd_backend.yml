@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./my-turborepo
-          file: docker/DockerFile.backend
+          file: docker/Dockerfile.backend
           push: true
           tags: zoldyk/todo-app-backend:${{ github.sha }}
 
