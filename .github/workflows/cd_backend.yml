@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: . # folder Docker can see
-          file: ./docker/DockerFile.backend # relative to context
+          file: ./docker/Dockerfile.backend # relative to context
           push: true
           tags: zoldyk/todo-app-backend:${{ github.sha }}
 
