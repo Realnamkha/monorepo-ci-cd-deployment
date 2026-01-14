@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # Pull the latest Docker image from Docker Hub
+            # Pull the latest Docker image from
             docker pull zoldyk/todo-app-backend:latest
 
             # Stop the existing container if running
