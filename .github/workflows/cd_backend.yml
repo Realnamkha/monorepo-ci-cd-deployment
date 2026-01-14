@@ -27,4 +27,23 @@ jobs:
           push: true
           tags: zoldyk/todo-app-backend:${{ github.sha }}
 
-    #step to deploy to a virtual machine
+      #step to deploy to a virtual machine
+      - name: Deploy Docker backend on EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ec2-13-203-218-164.ap-south-1.compute.amazonaws.com
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Pull the latest Docker image from Docker Hub
+            docker pull zoldyk/todo-app-backend:latest
+
+            # Stop the existing container if running
+            docker stop todo-app-backend || true
+            docker rm todo-app-backend || true
+
+            # Run the container on port 8080
+            docker run -d --name todo-app-backend -p 8080:8080 \
+            -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            zoldyk/todo-app-backend:${{ github.sha }}
